@@ -1,16 +1,23 @@
 let btn = document.querySelector("#adicionar-paciente");
-
 btn.addEventListener("click",function (event) {
   event.preventDefault();
      var form = document.querySelector("#form-add")
-     console.log(form);
      var paciente = ObtemPaciente(form);
      let pacienteTr = montaTr(paciente);
+
+     var erros = validaPaciente(paciente);
+     console.log(erros);
+     if(erros.length > 0 ){
+      exibeErros(erros);
+      return;
+     }
+
      var tabela = document.querySelector("#tabela-pacientes");
      tabela.appendChild(pacienteTr);
-
-     console.log(form);
      form.reset();
+
+      var mensagensErro = document.querySelector("#mensagens-erro");
+      mensagensErro.innerHTML = "";
 });
 
 
@@ -27,7 +34,7 @@ function ObtemPaciente(form) {
 
 function montaTr(paciente) {
   var pacienteTr = document.createElement("tr");
-  pacienteTr.classList.add("paciente")
+  pacienteTr.classList.add("paciente");
 
   pacienteTr.appendChild(montaTd(paciente.nome, "info-nome"));
   pacienteTr.appendChild(montaTd(paciente.peso, "info-peso"));
@@ -43,4 +50,38 @@ function montaTd(dado, classe) {
   td.textContent = dado;
   td.classList.add(classe);
   return td;
+}
+
+function validaPaciente(paciente){
+  var erros = [];
+
+  if(paciente.nome.length == 0)
+    erros.push("insira um nome ");
+
+  if(paciente.peso.length == 0)
+    erros.push("insira um peso ");
+
+  if(paciente.altura.length == 0)
+    erros.push("insira uma altura ");
+
+  if(paciente.gordura.length == 0)
+    erros.push("insira porcentagem de gordura ");
+
+  if(!validaPeso(paciente.peso))
+      erros.push("insira um peso valido");
+
+  if(!validaAltura(paciente.altura))
+    erros.push("insira uma altura valida");
+
+    return erros;
+}
+
+function exibeErros(erros) {
+  var ul = document.querySelector("#mensagens-erro");
+  ul.innerHTML = "";
+  erros.forEach(function (erro) {
+    var li = document.createElement("li");
+    li.textContent = erro;
+    ul.appendChild(li);
+  });
 }
