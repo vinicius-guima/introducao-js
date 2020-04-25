@@ -27,7 +27,7 @@ for(var i=0; i<pacientes.length;i++){
     paciente.classList.add("paciente-invalido")
   }
 
-  if (!validaAltura) {
+  if (!alturaValida) {
     console.log("altura Inválida");
     alturaValida = false;
     imc.textContent = "altura inválida!";
@@ -46,7 +46,7 @@ function calculaImc(peso, altura){
 }
 
 function validaPeso(peso){
-  if (peso > 0 && peso <1000){
+  if (peso >= 0 && peso <= 1000){
     return true;
   }else{
     return false;
@@ -54,7 +54,7 @@ function validaPeso(peso){
 }
 
 function validaAltura(altura){
-  if (altura > 0 && altura <3.0){
+  if (altura > 0 && altura <= 3.0){
     return true;
   }else{
     return false;

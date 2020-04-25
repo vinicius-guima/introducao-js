@@ -1,35 +1,36 @@
 let btn = document.querySelector("#adicionar-paciente");
-btn.addEventListener("click",function (event) {
-  event.preventDefault();
-     var form = document.querySelector("#form-add")
-     var paciente = ObtemPaciente(form);
-     let pacienteTr = montaTr(paciente);
+btn.addEventListener("click", function (event) {
+  event.preventDefault(); //prevnine o recarregamento da pagina
+  var form = document.querySelector("#form-add")
+  var paciente = ObtemPaciente(form);
+  
+  var erros = validaPaciente(paciente);
+  
+  if (erros.length > 0) {
+    exibeErros(erros);
+    return;
+  }
+  
+  let pacienteTr = montaTr(paciente);
 
-     var erros = validaPaciente(paciente);
-     console.log(erros);
-     if(erros.length > 0 ){
-      exibeErros(erros);
-      return;
-     }
+  var tabela = document.querySelector("#tabela-pacientes");
+  tabela.appendChild(pacienteTr);
+  form.reset();
 
-     var tabela = document.querySelector("#tabela-pacientes");
-     tabela.appendChild(pacienteTr);
-     form.reset();
-
-      var mensagensErro = document.querySelector("#mensagens-erro");
-      mensagensErro.innerHTML = "";
+  var mensagensErro = document.querySelector("#mensagens-erro");
+  mensagensErro.innerHTML = "";
 });
 
 
 function ObtemPaciente(form) {
   var paciente = {
-      nome: document.getElementById('nome').value,
-      peso: document.getElementById('peso').value,
-      altura: document.getElementById('altura').value,
-      gordura: document.getElementById('gordura').value,
-      imc: calculaImc(document.getElementById('peso').value, document.getElementById('altura').value)
-      }
-      return paciente;
+    nome: document.getElementById('nome').value,
+    peso: document.getElementById('peso').value,
+    altura: document.getElementById('altura').value,
+    gordura: document.getElementById('gordura').value,
+    imc: calculaImc(document.getElementById('peso').value, document.getElementById('altura').value)
+  }
+  return paciente;
 }
 
 function montaTr(paciente) {
@@ -52,33 +53,35 @@ function montaTd(dado, classe) {
   return td;
 }
 
-function validaPaciente(paciente){
+function validaPaciente(paciente) {
   var erros = [];
 
-  if(paciente.nome.length == 0)
+  if (paciente.nome.length == 0)
     erros.push("insira um nome ");
 
-  if(paciente.peso.length == 0)
+  if (paciente.peso.length == 0)
     erros.push("insira um peso ");
 
-  if(paciente.altura.length == 0)
+  if (paciente.altura.length == 0)
     erros.push("insira uma altura ");
 
-  if(paciente.gordura.length == 0)
+  if (paciente.gordura.length == 0)
     erros.push("insira porcentagem de gordura ");
 
-  if(!validaPeso(paciente.peso))
-      erros.push("insira um peso valido");
+  if (!validaPeso(paciente.peso))
+    erros.push("insira um peso valido");
 
-  if(!validaAltura(paciente.altura))
+  if (!validaAltura(paciente.altura))
     erros.push("insira uma altura valida");
 
-    return erros;
+  return erros;
 }
 
 function exibeErros(erros) {
+
   var ul = document.querySelector("#mensagens-erro");
   ul.innerHTML = "";
+
   erros.forEach(function (erro) {
     var li = document.createElement("li");
     li.textContent = erro;
