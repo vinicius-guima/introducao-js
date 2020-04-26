@@ -11,15 +11,19 @@ btn.addEventListener("click", function (event) {
     return;
   }
   
-  let pacienteTr = montaTr(paciente);
-
-  var tabela = document.querySelector("#tabela-pacientes");
-  tabela.appendChild(pacienteTr);
+  adicionaPAcienteNaTabela(paciente);
   form.reset();
-
+  
   var mensagensErro = document.querySelector("#mensagens-erro");
   mensagensErro.innerHTML = "";
 });
+
+function adicionaPAcienteNaTabela(paciente) {
+  let pacienteTr = montaTr(paciente);
+  var tabela = document.querySelector("#tabela-pacientes");
+  tabela.appendChild(pacienteTr);
+
+}
 
 
 function ObtemPaciente(form) {
