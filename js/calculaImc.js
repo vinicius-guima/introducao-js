@@ -1,24 +1,24 @@
-let titulo = document.querySelector(".titulo");
+var titulo = document.querySelector(".titulo");
 titulo.textContent = "Aparecida Nutricionista";
 
-let pacientes = document.querySelectorAll(".paciente");
+var pacientes = document.querySelectorAll(".paciente");
 
 for(var i=0; i<pacientes.length;i++){
-  let paciente = pacientes[i];
+  var paciente = pacientes[i];
 
-  let nome = paciente.querySelector(".info-nome");
+  var nome = paciente.querySelector(".info-nome");
   nome = nome.textContent;
 
-  let peso = paciente.querySelector(".info-peso");
+  var peso = paciente.querySelector(".info-peso");
   peso = peso.textContent;
 
-  let altura = paciente.querySelector(".info-altura");
+  var altura = paciente.querySelector(".info-altura");
   altura = altura.textContent;
 
-  let imc = paciente.querySelector(".info-imc");
+  var imc = paciente.querySelector(".info-imc");
 
-  let pesoValido = validaPeso(peso);
-  let alturaValida = validaAltura(altura);
+  var pesoValido = validaPeso(peso);
+  var alturaValida = validaAltura(altura);
 
   if (!pesoValido) {
     console.log("Peso Inválido");

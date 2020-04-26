@@ -126,7 +126,7 @@ button[disabled=disabled], button:disabled {
 }
 
 .adicionar-paciente{
-    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .campo-invalido{
@@ -137,6 +137,18 @@ button[disabled=disabled], button:disabled {
 	background-color: lightcoral;
 }
 
+
 #mensagens-erro{
 	color:red;
+}
+
+#filtrar{
+width: 15em;
+height: 2em;
+margin-bottom: 1em;
+
+}
+
+.invisivel{
+display: none;
 }
