@@ -10,7 +10,12 @@ btnBuscar.addEventListener("click", function () {
     xhr.open("GET", API + "/pacientes"); // abre a requisição 
 
     xhr.addEventListener("load", function () {
-        var response = xhr.responseText;
+
+        var erroAjax = document.querySelector("#erro-ajax");
+
+        if(xhr.status == 200){ //verfica a resposta 
+        erroAjax.classList.add("invisivel");
+        var response = xhr.responseText; //testo da resposta da api
         console.log(response);
         console.log(typeof response); // string
 
@@ -20,12 +25,10 @@ btnBuscar.addEventListener("click", function () {
         pacientes.forEach(paciente => {
             adicionaPAcienteNaTabela(paciente);
         });
-
-
+    }else{
+        erroAjax.classList.remove("invisivel");
+    }
     });
-
-    xhr.send();
-
-
+    xhr.send(); // envia a requisição
 });
 

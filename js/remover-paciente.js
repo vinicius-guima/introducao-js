@@ -7,7 +7,7 @@ tabela.addEventListener("dblclick", function(event){
     setTimeout(()=> {//faz o js esperar para fazer a função 
         event.target.parentNode.remove();
         
-    },500);
+    },1500);
 });
 
 //var pacientes = document.querySelectorAll(".paciente");
